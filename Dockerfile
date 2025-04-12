@@ -1,18 +1,17 @@
-# Utilise une image officielle Python légère
+# Étape 1 : Choisir une image Python légère
 FROM python:3.10-slim
 
-# Dossier de travail à l'intérieur du conteneur
+# Étape 2 : Définir le répertoire de travail dans le container
 WORKDIR /app
 
-# Copier les dépendances
+# Étape 3 : Copier les dépendances et installer
 COPY requirements.txt .
-
-# Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier tout le code source dans le conteneur
+# Étape 4 : Copier le code source
 COPY . .
 
-# Lancer le script de collecte de données
-CMD ["python", "scripts/collect_forex.py"]
+# Étape 5 : Commande par défaut exécutée quand on lance le container
+CMD ["bash", "-c", "python scripts/collect_forex.py && python scripts/clean_data.py"]
+
 
