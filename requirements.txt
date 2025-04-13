@@ -1,3 +1,15 @@
-yfinance
-pandas
-matplotlib
+yfinance>=0.2.36
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+scikit-learn>=1.3.0
+tensorflow>=2.13.0
+transformers>=4.30.0
+torch>=2.0.0
+xgboost>=2.0.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+ta>=0.10.0  # Technical analysis library
+newsapi-python>=0.2.7
+tweepy>=4.14.0
+seaborn>=0.12.0

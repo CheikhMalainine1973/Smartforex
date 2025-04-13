@@ -1,37 +1,115 @@
-Smart Forex : le bit de ce projet et de predire la tendence ou la besse d'une marcher finencier comme forex a l'aide des models entrenais a analyser(technique ou sentiment ) et prend la desicion final ou la prediction global 
-Architecture : l'architecture proposer c’est une architecture en plusieurs modèles spécialisés, qu’on appelle souvent un système en pipeline ou en ensemble modulaire. 
+# Smart Forex Prediction System
 
-Systeme en pipline :
+A comprehensive forex market prediction system that combines technical analysis and sentiment analysis to generate trading signals.
 
-Module 1 : Analyse Technique
+## Features
 
-Données : OHLCV (Open, High, Low, Close, Volume)
-Modèle : LSTM ou Temporal Transformer
-Sortie : prédiction brute (tendance, probabilité de hausse/baisse)
+- **Technical Analysis**: Uses LSTM model and various technical indicators (SMA, EMA, MACD, RSI, Bollinger Bands)
+- **Sentiment Analysis**: Analyzes news articles and social media using FinBERT
+- **Fusion Model**: Combines technical and sentiment analysis using XGBoost
+- **Automated Pipeline**: End-to-end data collection, analysis, and prediction
+- **Visualization**: Plots and charts for analysis results
 
-Module 2 : Analyse de Sentiment / News
+## Installation
 
-Données : titres d’articles, tweets, annonces économiques
-Modèle : FinBERT / FinGPT / autre NLP model
-Sortie : score de sentiment ou de confiance du marché
+1. Clone the repository:
+```bash
+git clone https://github.com/CheikhMalainine1973/smartforex.git
+cd smartforex
+```
 
-Module 3 : Fusion & Prédiction Finale
+2. Create a virtual environment and activate it:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-Données : sortie des deux modules précédents
-Modèle : MLP (Multi-Layer Perceptron), XGBoost, ou simple réseau dense
-Objectif : prendre une décision plus robuste et contextuelle
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
+4. Set up API keys:
+   - Create a `.env` file in the project root
+   - Add your API keys for News API and Twitter API:
+```
+NEWS_API_KEY=your_news_api_key
+TWITTER_API_KEY=your_twitter_api_key
+TWITTER_API_SECRET=your_twitter_api_secret
+TWITTER_ACCESS_TOKEN=your_twitter_access_token
+TWITTER_ACCESS_TOKEN_SECRET=your_twitter_access_token_secret
+```
 
+## Usage
 
+1. Run the main analysis pipeline:
+```bash
+python scripts/main.py
+```
 
-Étapes principales du projet :
-Étape	    Tâche	                     Description
-1	Collecte de données		Forex (OHLCV) via API (ex: Yahoo Finance, AlphaVantage) + News
-2	Prétraitement	        	Normalisation, calcul d’indicateurs techniques, nettoyage de texte
-3	Modélisation Module 1		LSTM entraîné sur les données techniques
-4	Modélisation Module 2		Sentiment analysis via FinBERT
-5	Fusion des données		Combine les sorties des deux modules
-6	Modélisation finale	        Entraîner un classifieur final
-7	Évaluation & tests	        Metrics : Accuracy, F1-score, MAE, etc.
-8	Visualisation & interprétation	Graphiques, tableaux de décisions
-9	Automatisation			Script ou interface pour lancer l’analyse complète
+2. For specific currency pairs:
+```python
+from scripts.main import SmartForex
+
+smart_forex = SmartForex()
+smart_forex.run_pipeline(symbol="EURUSD=X", days_back=30)
+```
+
+## Project Structure
+
+```
+smartforex/
+├── data/               # Data storage
+├── models/            # Trained models
+├── results/           # Analysis results
+├── scripts/           # Python modules
+│   ├── data_collector.py
+│   ├── technical_analysis.py
+│   ├── sentiment_analysis.py
+│   ├── fusion_model.py
+│   └── main.py
+├── requirements.txt   # Dependencies
+└── README.md         # Documentation
+```
+
+## Components
+
+### 1. Data Collection
+- Fetches forex data using yfinance
+- Collects news articles using News API
+- Gathers tweets using Twitter API
+
+### 2. Technical Analysis
+- Calculates technical indicators
+- Trains LSTM model for price prediction
+- Analyzes market trends
+
+### 3. Sentiment Analysis
+- Uses FinBERT for financial sentiment analysis
+- Analyzes news and social media sentiment
+- Generates market sentiment scores
+
+### 4. Fusion Model
+- Combines technical and sentiment features
+- Uses XGBoost for final prediction
+- Generates trading signals with confidence scores
+
+## Output
+
+The system generates:
+- Technical analysis charts
+- Sentiment analysis results
+- Trading signals with confidence levels
+- JSON files with detailed analysis results
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## Disclaimer
+
+This system is for educational purposes only. Trading forex involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results.
